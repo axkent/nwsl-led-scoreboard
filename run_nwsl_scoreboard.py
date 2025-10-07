@@ -112,7 +112,13 @@ class NWSLScoreboard:
             for event_id, games in events.items():
                 if any(game['team'] == self.favorite_team for game in games):
                     filtered_events[event_id] = games
-            return list(filtered_events.values())
+            
+            # FIXED: Only return the FIRST game for the favorite team
+            # This prevents showing multiple games for the same team
+            if filtered_events:
+                return [list(filtered_events.values())[0]]
+            else:
+                return []
         
         return list(events.values())
     

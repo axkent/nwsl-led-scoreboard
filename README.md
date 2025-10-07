@@ -4,9 +4,9 @@ An LED scoreboard for the National Women's Soccer League (NWSL). Displays live s
 
 ![NWSL Scoreboard](https://img.shields.io/badge/status-active-success) ![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-4-red)
 
-![IMG_6961](https://github.com/user-attachments/assets/5aebd24d-714a-46e4-bd6f-9d9b079749c1)
-![IMG_6959](https://github.com/user-attachments/assets/5deace7f-e454-4f12-bf58-15fc6794c947)
+![IMG_6962](https://github.com/user-attachments/assets/9b468052-b406-4b66-ae9b-7121ad3d1457)
 
+![IMG_6961](https://github.com/user-attachments/assets/07e25b9d-e83e-4a65-9da0-76bfb7ea8bac)
 
 ## Features
 

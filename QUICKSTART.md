@@ -12,7 +12,7 @@ Get your NWSL LED Scoreboard up and running in 5 minutes!
 
 ```bash
 cd ~
-git clone https://github.com/yourusername/nwsl-led-scoreboard.git
+git clone https://github.com/axkent/nwsl-led-scoreboard.git
 cd nwsl-led-scoreboard
 chmod +x install.sh
 ./install.sh

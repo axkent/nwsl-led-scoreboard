@@ -163,7 +163,7 @@ class NWSLScoreboard:
         graphics.DrawText(self.canvas, self.font, 12, 24, white, team_abbr)
         
         self.canvas = self.matrix.SwapOnVSync(self.canvas)
-        time.sleep(2)
+        time.sleep(15)  # Show goal celebration for 15 seconds
     
     def draw_matchup(self, matchup):
         """Draw game information on LED matrix"""

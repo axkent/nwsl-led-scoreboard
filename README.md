@@ -40,7 +40,6 @@ This [Adafruit wishlist](https://www.adafruit.com/wishlists/612118) contains the
 ## Installation (One Command)
 
 ```bash
-cd ~
 git clone https://github.com/axkent/nwsl-led-scoreboard.git
 cd nwsl-led-scoreboard
 bash install.sh
@@ -62,7 +61,7 @@ The installation script will:
 After installation completes, test your scoreboard:
 
 ```bash
-cd ~/nwsl-led-scoreboard
+cd nwsl-led-scoreboard
 sudo venv/bin/python3 main.py
 ```
 
@@ -78,7 +77,7 @@ Press `Ctrl+C` to stop.
 ### Show Only Your Favorite Team
 
 ```bash
-cd ~/nwsl-led-scoreboard
+cd nwsl-led-scoreboard
 sudo venv/bin/python3 main.py --team SD
 
 # Or other teams:
@@ -105,7 +104,7 @@ sudo venv/bin/python3 main.py --team SEA
 ### Use Your Local Timezone
 
 ```bash
-cd ~/nwsl-led-scoreboard
+cd nwsl-led-scoreboard
 
 # Eastern Time
 sudo venv/bin/python3 main.py --tz America/New_York
@@ -128,7 +127,7 @@ The display will:
 
 Just run:
 ```bash
-cd ~/nwsl-led-scoreboard
+cd nwsl-led-scoreboard
 sudo venv/bin/python3 main.py
 ```
 
@@ -140,7 +139,7 @@ Press `Ctrl+C` in the terminal where the scoreboard is running.
 
 Or use the stop script:
 ```bash
-cd ~/nwsl-led-scoreboard
+cd nwsl-led-scoreboard
 bash stop_scoreboard.sh
 ```
 
@@ -186,7 +185,7 @@ Make sure you've run the `install.sh` script completely. The RGB matrix library 
 ### Fonts Not Found
 The install script copies fonts to a `fonts/` directory in the project. If you see font errors, verify the fonts exist:
 ```bash
-ls ~/nwsl-led-scoreboard/fonts/
+ls nwsl-led-scoreboard/fonts/
 ```
 
 ### Display Issues

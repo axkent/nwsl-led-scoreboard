@@ -253,11 +253,11 @@ MIT License - feel free to use and modify for your own projects.
 
 ## Acknowledgments
 
-This project was heavily inspired by [MLB-LED-Scoreboard](https://github.com/MLB-LED-Scoreboard/mlb-led-scoreboard).
-
+- This project was heavily inspired by [MLB-LED-Scoreboard](https://github.com/MLB-LED-Scoreboard/mlb-led-scoreboard).
 - [rpi-rgb-led-matrix](https://github.com/hzeller/rpi-rgb-led-matrix) by Henner Zeller
 - ESPN API for NWSL data
 - NWSL teams and fans
+
 
 ## Support
 
@@ -265,7 +265,3 @@ If you encounter issues:
 1. Check the Troubleshooting section above
 2. Review logs in `/tmp/nwsl_refresh.log` and `/tmp/nwsl_display.log` (if using cron)
 3. Open an issue on GitHub with details about your setup and error messages
-
----
-
-**Enjoy your NWSL LED Scoreboard!** ⚽✨

@@ -2,6 +2,8 @@
 
 Display live NWSL (National Women's Soccer League) scores and schedules on an RGB LED matrix powered by Raspberry Pi.
 
+![NWSL Scoreboard Demo](https://img.shields.io/badge/status-active-success)
+
 ## Features
 
 - 🏆 Live game scores with real-time updates
@@ -19,7 +21,7 @@ Display live NWSL (National Women's Soccer League) scores and schedules on an RG
 - 64x32 RGB LED Matrix
 - Adafruit RGB Matrix Bonnet
 
-While other configurations (Raspberry Pi 3B+, HAT instead of Bonnet, etc.) may work, they have not been tested. You may need to adjust the `hardware_mapping` setting in the configuration.
+While other configurations (Raspberry Pi 3B+, 5, or HAT instead of Bonnet) may work, they have not been tested. You may need to adjust the `hardware_mapping` setting in the configuration.
 
 **For users new to Raspberry Pi:**
 This [Adafruit wishlist](https://www.adafruit.com/wishlists/612118) contains the materials I used to get this project and other popular LED projects to work. The [MLB-LED-Scoreboard Wiki](https://github.com/MLB-LED-Scoreboard/mlb-led-scoreboard/wiki) has helpful guidance on getting started. This [YouTube video](https://www.youtube.com/watch?v=7sL1TUR2JeM) was helpful in figuring out how to set up the Matrix Bonnet. I may draft a how-to video in the near future for more guidance.
@@ -99,7 +101,21 @@ sudo ./venv/bin/python3 main.py
 sudo ./venv/bin/python3 main.py --team SD
 ```
 
-Available team codes: `SD`, `BAY`, `SEA`, `KC`, `UTA`, `LOU`, `ORL`, `WAS`, `POR`, `GFC`, `LA`, `CHI`, `NC`, `HOU`
+Available team codes: 
+- `SD` - San Diego Wave FC
+- `BAY` - Bay FC
+- `SEA` - Seattle Reign FC
+- `KC` - Kansas City Current
+- `UTA` - Utah Royals FC
+- `LOU` - Racing Louisville FC
+- `ORL` - Orlando Pride
+- `WAS` - Washington Spirit
+- `POR` - Portland Thorns FC
+- `GFC` - NJ/NY Gotham FC
+- `LA` - Angel City FC
+- `CHI` - Chicago Red Stars
+- `NC` - North Carolina Courage
+- `HOU` - Houston Dash
 
 ### Change Timezone
 
@@ -251,3 +267,5 @@ If you encounter issues:
 3. Open an issue on GitHub with details about your setup and error messages
 
 ---
+
+**Enjoy your NWSL LED Scoreboard!** ⚽✨

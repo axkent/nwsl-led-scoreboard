@@ -99,4 +99,31 @@ For 24/7 operation with automatic updates:
 
 ### Option 1: Using two terminals
 
-**Terminal 1
+**Terminal 1 - Auto refresh:**
+```bash
+cd ~/nwsl-led-scoreboard
+source venv/bin/activate
+python3 auto_refresh.py --tz America/Los_Angeles
+```
+
+**Terminal 2 - Display:**
+```bash
+cd ~/nwsl-led-scoreboard
+source venv/bin/activate
+sudo ./venv/bin/python3 run_nwsl_scoreboard.py
+```
+
+### Option 2: Using screen (run in background)
+
+```bash
+screen -dmS nwsl-refresh bash -c "cd ~/nwsl-led-scoreboard && source venv/bin/activate && python3 auto_refresh.py"
+screen -dmS nwsl-display bash -c "cd ~/nwsl-led-scoreboard && source venv/bin/activate && sudo ./venv/bin/python3 run_nwsl_scoreboard.py"
+```
+
+## Need Help?
+
+Check the full [README.md](README.md) for:
+- Detailed troubleshooting
+- Configuration options
+- Hardware setup guidance
+- Run at startup instructions

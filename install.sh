@@ -50,11 +50,74 @@ RGB_DIR="$HOME/rpi-rgb-led-matrix"
 
 if [ -d "$RGB_DIR" ]; then
     echo "   RGB Matrix library directory already exists"
-    read -p "   Rebuild it? (y/n) " -n 1 -r
+    echo "   This usually means you've run this installer before."
+    read -p "   Do you want to rebuild it? (y/n) " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo "   Removing old directory..."
-        rm -rf "$RGB_DIR"
+        echo "   Cleaning up old installation..."
+        sudo rm -rf "$RGB_DIR"
+        echo "   ✓ Old directory removed"
+    else
+        echo "   Skipping RGB Matrix rebuild, will use existing installation"
+        # Still need to copy the .so file
+        echo "   Checking for rgbmatrix.so..."
+        if [ -f "$RGB_DIR/bindings/python/rgbmatrix.so" ]; then
+            echo "   Copying library to virtual environment..."
+            PYTHON_VERSION=$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
+            cp "$RGB_DIR/bindings/python/rgbmatrix.so" "$SCRIPT_DIR/venv/lib/python${PYTHON_VERSION}/site-packages/"
+            echo "   ✓ RGB Matrix library copied"
+            
+            # Skip to fonts step
+            echo ""
+            echo "Step 5: Creating fonts directory..."
+            cd "$SCRIPT_DIR"
+            if [ ! -d "fonts" ]; then
+                mkdir -p fonts
+                cp "$RGB_DIR/fonts/5x7.bdf" fonts/
+                cp "$RGB_DIR/fonts/4x6.bdf" fonts/
+                echo "   ✓ Fonts copied"
+            else
+                echo "   Fonts directory already exists"
+            fi
+            
+            echo ""
+            echo "Step 6: Making scripts executable..."
+            chmod +x main.py
+            chmod +x nwsl-live.py
+            chmod +x run_nwsl_scoreboard.py
+            chmod +x auto_refresh.py
+            chmod +x stop_scoreboard.sh
+            echo "   ✓ Scripts are executable"
+            
+            echo ""
+            echo "================================================"
+            echo "Installation Complete! 🎉"
+            echo "================================================"
+            echo ""
+            echo "Quick Start Commands:"
+            echo ""
+            echo "1. Show all games (Pacific Time):"
+            echo "   cd $SCRIPT_DIR"
+            echo "   source venv/bin/activate"
+            echo "   sudo ./venv/bin/python3 main.py"
+            echo ""
+            echo "2. Filter by team (e.g., San Diego):"
+            echo "   sudo ./venv/bin/python3 main.py --team SD"
+            echo ""
+            echo "3. Change timezone (e.g., Eastern):"
+            echo "   sudo ./venv/bin/python3 main.py --tz America/New_York"
+            echo ""
+            echo "For continuous operation, see the 'Auto-Refresh Mode' section in README.md"
+            echo ""
+            echo "To stop the scoreboard at any time:"
+            echo "   ./stop_scoreboard.sh"
+            echo ""
+            exit 0
+        else
+            echo "   ⚠️  rgbmatrix.so not found in existing installation"
+            echo "   Will rebuild from scratch..."
+            sudo rm -rf "$RGB_DIR"
+        fi
     fi
 fi
 

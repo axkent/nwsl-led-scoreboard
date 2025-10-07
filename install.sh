@@ -136,33 +136,42 @@ make
 # Now build Python bindings
 echo "   Building Python bindings..."
 cd bindings/python
-make build-python PYTHON=$(which python3)
-sudo make install-python PYTHON=$(which python3)
 
-# Check multiple possible locations for the .so file
-if [ -f "rgbmatrix.so" ]; then
-    SO_FILE="rgbmatrix.so"
-elif [ -f "build/lib.linux-aarch64-cpython-311/rgbmatrix.so" ]; then
-    SO_FILE="build/lib.linux-aarch64-cpython-311/rgbmatrix.so"
-elif [ -f "build/lib.linux-armv7l-cpython-311/rgbmatrix.so" ]; then
-    SO_FILE="build/lib.linux-armv7l-cpython-311/rgbmatrix.so"
+# Try the proper way first (using pip/build tools)
+python3 -m pip install .
+
+# Check if rgbmatrix is importable now
+if python3 -c "import rgbmatrix" 2>/dev/null; then
+    echo "   ✓ RGB Matrix library installed successfully"
 else
-    SO_FILE=""
+    echo "   pip install failed, trying make build-python..."
+    make build-python PYTHON=$(which python3)
+    sudo make install-python PYTHON=$(which python3)
+    
+    # Check again
+    if ! python3 -c "import rgbmatrix" 2>/dev/null; then
+        echo ""
+        echo "❌ Error: Could not install rgbmatrix library!"
+        echo "   Check the error messages above."
+        exit 1
+    fi
 fi
 
-# Verify the .so file exists
-if [ -z "$SO_FILE" ]; then
-    echo ""
-    echo "❌ Error: rgbmatrix.so was not created!"
-    echo "   This usually means the build failed."
-    echo "   Check the error messages above."
-    exit 1
-fi
-
+# Copy the library to the venv
 echo "   Copying library to virtual environment..."
 PYTHON_VERSION=$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
-cp "$SO_FILE" "$SCRIPT_DIR/venv/lib/python${PYTHON_VERSION}/site-packages/"
-echo "   ✓ RGB Matrix library installed"
+
+# Find where rgbmatrix was installed
+RGBMATRIX_LOCATION=$(python3 -c "import rgbmatrix; print(rgbmatrix.__file__)" 2>/dev/null | xargs dirname)
+
+if [ ! -z "$RGBMATRIX_LOCATION" ]; then
+    # Copy all rgbmatrix files to venv
+    cp -r "$RGBMATRIX_LOCATION" "$SCRIPT_DIR/venv/lib/python${PYTHON_VERSION}/site-packages/"
+    echo "   ✓ RGB Matrix library copied to virtual environment"
+else
+    echo "   ⚠️  Warning: Could not find rgbmatrix installation"
+    echo "   The library may still work if it was installed system-wide"
+fi
 
 echo ""
 echo "Step 5: Creating fonts directory..."

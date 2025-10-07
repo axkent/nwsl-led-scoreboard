@@ -139,8 +139,19 @@ cd bindings/python
 make build-python PYTHON=$(which python3)
 sudo make install-python PYTHON=$(which python3)
 
+# Check multiple possible locations for the .so file
+if [ -f "rgbmatrix.so" ]; then
+    SO_FILE="rgbmatrix.so"
+elif [ -f "build/lib.linux-aarch64-cpython-311/rgbmatrix.so" ]; then
+    SO_FILE="build/lib.linux-aarch64-cpython-311/rgbmatrix.so"
+elif [ -f "build/lib.linux-armv7l-cpython-311/rgbmatrix.so" ]; then
+    SO_FILE="build/lib.linux-armv7l-cpython-311/rgbmatrix.so"
+else
+    SO_FILE=""
+fi
+
 # Verify the .so file exists
-if [ ! -f "rgbmatrix.so" ]; then
+if [ -z "$SO_FILE" ]; then
     echo ""
     echo "❌ Error: rgbmatrix.so was not created!"
     echo "   This usually means the build failed."
@@ -150,7 +161,7 @@ fi
 
 echo "   Copying library to virtual environment..."
 PYTHON_VERSION=$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
-cp rgbmatrix.so "$SCRIPT_DIR/venv/lib/python${PYTHON_VERSION}/site-packages/"
+cp "$SO_FILE" "$SCRIPT_DIR/venv/lib/python${PYTHON_VERSION}/site-packages/"
 echo "   ✓ RGB Matrix library installed"
 
 echo ""

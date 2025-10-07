@@ -49,12 +49,12 @@ class NWSLScoreboard:
             self.schedule_data = json.load(f)
         print(f"Loaded {len(self.schedule_data)} games")
         
-        # Find font directory - check multiple possible locations
+        # FIXED: Find font directory - check multiple possible locations
         script_dir = os.path.dirname(os.path.abspath(__file__))
         possible_font_dirs = [
             os.path.join(script_dir, "fonts"),
-            "/home/pi/rpi-rgb-led-matrix/fonts",
             os.path.expanduser("~/rpi-rgb-led-matrix/fonts"),
+            "/home/pi/rpi-rgb-led-matrix/fonts",
         ]
         
         font_dir = None
@@ -68,6 +68,7 @@ class NWSLScoreboard:
             print("Checked locations:")
             for dir_path in possible_font_dirs:
                 print(f"  - {dir_path}")
+            print("\nMake sure you ran the install.sh script!")
             sys.exit(1)
         
         print(f"Using fonts from: {font_dir}")
@@ -85,7 +86,7 @@ class NWSLScoreboard:
         options.cols = 64
         options.chain_length = 1
         options.parallel = 1
-        options.hardware_mapping = 'adafruit-hat'
+        options.hardware_mapping = 'adafruit-hat'  # Change to 'adafruit-hat-pwm' for Bonnet if needed
         options.brightness = 75
         
         self.matrix = RGBMatrix(options=options)

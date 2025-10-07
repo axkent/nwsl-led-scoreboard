@@ -1,0 +1,7 @@
+requests>=2.31.0
+pandas>=2.0.0
+pytz>=2023.3
+Pillow>=10.0.0
+
+# Note: rgbmatrix must be installed separately from the rpi-rgb-led-matrix library
+# See README.md for installation instructions

@@ -36,8 +36,7 @@ This [Adafruit wishlist](https://www.adafruit.com/wishlists/612118) contains the
 ## Installation (One Command)
 
 ```bash
-cd ~
-git clone https://github.com/yourusername/nwsl-led-scoreboard.git
+git clone https://github.com/axkent/nwsl-led-scoreboard.git
 cd nwsl-led-scoreboard
 chmod +x install.sh
 ./install.sh

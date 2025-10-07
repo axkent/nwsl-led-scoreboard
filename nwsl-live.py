@@ -42,7 +42,7 @@ parser.add_argument('--tz', type=str, default='America/Los_Angeles',
                     help='Timezone for display (e.g., America/New_York, America/Chicago, America/Denver)')
 args = parser.parse_args()
 
-# Get the target timezone - MOVED UP HERE
+# Get the target timezone
 target_tz = pytz.timezone(args.tz)
 print(f"Using timezone: {args.tz}")
 
@@ -93,16 +93,21 @@ if df.empty:
     print("⚠️  No games found in date range")
     exit(0)
 
-# ---------- LOGIC: Show recent completed game or next scheduled ----------
-# CHANGED: Use the target timezone for "now"
+# ---------- LOGIC: Show live game, recent completed, or next scheduled ----------
 now = datetime.now(target_tz)
 now_utc = now.astimezone(pytz.UTC)
 cutoff_time = now_utc - timedelta(hours=24)
 
-# Find games to display per team
+# Track which teams have been processed
 games_to_show = []
+teams_with_games = set()  # Track teams that already have a game selected
 
 for team in team_lookup['team']:
+    # Skip if this team already has a game (from a live game that includes both teams)
+    if team in teams_with_games:
+        print(f"  → Skipping {team} - already showing game for this team")
+        continue
+    
     # Get all games for this team
     team_games = df[(df['home_team'] == team) | (df['away_team'] == team)].copy()
     
@@ -112,15 +117,20 @@ for team in team_lookup['team']:
     # Sort by date
     team_games = team_games.sort_values('date')
     
-    # Check for live games first (highest priority)
+    # PRIORITY 1: Check for live games first (highest priority)
     live_games = team_games[team_games['state'] == 'in']
     
     if not live_games.empty:
-        # Show live game
+        # Show live game - this is the ONLY game we want for this team
         game_to_show = live_games.iloc[0]
         print(f"  → Selected LIVE game for {team}")
+        
+        # Add BOTH teams from this game to the processed set
+        teams_with_games.add(game_to_show['home_team'])
+        teams_with_games.add(game_to_show['away_team'])
+        
     else:
-        # Check for recent completed games (within 24 hours)
+        # PRIORITY 2: Check for recent completed games (within 24 hours)
         recent_completed = team_games[
             (team_games['state'] == 'post') & 
             (team_games['date'] >= cutoff_time)
@@ -130,26 +140,26 @@ for team in team_lookup['team']:
             # Show the most recent completed game
             game_to_show = recent_completed.iloc[-1]
             print(f"  → Selected RECENT game for {team}")
+            teams_with_games.add(team)
         else:
-            # No recent completed game or live game, show next upcoming game
-            # CHANGED: Use now_utc instead of now.normalize()
+            # PRIORITY 3: Show next upcoming game
             today_start = now_utc.replace(hour=0, minute=0, second=0, microsecond=0)
             upcoming = team_games[
                 (team_games['state'] == 'pre') &
                 (team_games['date'] >= today_start)
             ]
             
-            print(f"  Checking upcoming games for {team}: found {len(upcoming)}")
-            
             if not upcoming.empty:
                 game_to_show = upcoming.iloc[0]
                 print(f"  → Selected UPCOMING game for {team}")
+                teams_with_games.add(team)
             else:
-                # No upcoming games, show most recent completed
+                # PRIORITY 4: No upcoming games, show most recent completed
                 completed = team_games[team_games['state'] == 'post']
                 if not completed.empty:
                     game_to_show = completed.iloc[-1]
                     print(f"  → Selected OLD completed game for {team}")
+                    teams_with_games.add(team)
                 else:
                     print(f"  → SKIPPING {team} - no valid games")
                     continue
@@ -187,4 +197,4 @@ team_games.to_json("/tmp/nwsl_schedule.json", orient="records", date_format="iso
 os.chmod("/tmp/nwsl_schedule.json", 0o666)
 print(f"✅ JSON saved with {len(games_to_show)} games to display!")
 print(f"   Games within 24hrs or next scheduled games shown")
-print(f"   Times displayed in: {args.tz}")  # ADDED: Confirmation message
+print(f"   Times displayed in: {args.tz}")

@@ -63,27 +63,27 @@ After installation completes, test your scoreboard:
 
 ```bash
 cd ~/nwsl-led-scoreboard
-source venv/bin/activate
-sudo ./venv/bin/python3 main.py
+sudo venv/bin/python3 main.py
 ```
 
 This will:
 - Fetch the latest NWSL game data from ESPN
-- Display it on your LED matrix
+- Start auto-refresh (updates every 45 seconds)
+- Display games on your LED matrix
 - Use Pacific Time by default
 - Show all teams
+
+Press `Ctrl+C` to stop.
 
 ### Show Only Your Favorite Team
 
 ```bash
-# San Diego Wave FC
-sudo ./venv/bin/python3 main.py --team SD
+cd ~/nwsl-led-scoreboard
+sudo venv/bin/python3 main.py --team SD
 
-# Bay FC
-sudo ./venv/bin/python3 main.py --team BAY
-
-# Seattle Reign FC
-sudo ./venv/bin/python3 main.py --team SEA
+# Or other teams:
+sudo venv/bin/python3 main.py --team BAY
+sudo venv/bin/python3 main.py --team SEA
 ```
 
 **Team Codes:**
@@ -105,54 +105,43 @@ sudo ./venv/bin/python3 main.py --team SEA
 ### Use Your Local Timezone
 
 ```bash
+cd ~/nwsl-led-scoreboard
+
 # Eastern Time
-sudo ./venv/bin/python3 main.py --tz America/New_York
+sudo venv/bin/python3 main.py --tz America/New_York
 
 # Central Time
-sudo ./venv/bin/python3 main.py --tz America/Chicago
+sudo venv/bin/python3 main.py --tz America/Chicago
 
 # Mountain Time
-sudo ./venv/bin/python3 main.py --tz America/Denver
+sudo venv/bin/python3 main.py --tz America/Denver
 ```
 
-### Auto-Refresh Mode (Recommended for 24/7 Operation)
+### Auto-Refresh Mode (Built-in)
 
-For continuous operation with automatic data updates:
+The scoreboard now automatically refreshes data every 45 seconds when you run `main.py`. No additional setup needed!
 
-**Option 1: Using two terminals**
+The display will:
+- Update live game scores in real-time
+- Refresh the game clock every 45 seconds
+- Switch between multiple games if showing all teams
 
-Terminal 1 - Start auto-refresh:
+Just run:
 ```bash
 cd ~/nwsl-led-scoreboard
-source venv/bin/activate
-python3 auto_refresh.py --tz America/Los_Angeles
+sudo venv/bin/python3 main.py
 ```
 
-Terminal 2 - Start display:
-```bash
-cd ~/nwsl-led-scoreboard
-source venv/bin/activate
-sudo ./venv/bin/python3 run_nwsl_scoreboard.py
-```
-
-**Option 2: Using screen (run in background)**
-```bash
-screen -dmS nwsl-refresh bash -c "cd ~/nwsl-led-scoreboard && source venv/bin/activate && python3 auto_refresh.py"
-screen -dmS nwsl-display bash -c "cd ~/nwsl-led-scoreboard && source venv/bin/activate && sudo ./venv/bin/python3 run_nwsl_scoreboard.py"
-```
-
-To reattach to screens:
-```bash
-screen -r nwsl-refresh  # View refresh logs
-screen -r nwsl-display  # View display logs
-```
+Press `Ctrl+C` to stop both the refresh and display.
 
 ### Stop the Scoreboard
 
-Press `Ctrl+C` or run:
+Press `Ctrl+C` in the terminal where the scoreboard is running.
 
+Or use the stop script:
 ```bash
-./stop_scoreboard.sh
+cd ~/nwsl-led-scoreboard
+bash stop_scoreboard.sh
 ```
 
 ## Configuration
@@ -264,12 +253,11 @@ MIT License - feel free to use and modify for your own projects.
 
 ## Acknowledgments
 
-This project was heavily inspired by [MLB-LED-Scoreboard](https://github.com/MLB-LED-Scoreboard/mlb-led-scoreboard) by Tyler Porter.
+This project was heavily inspired by [MLB-LED-Scoreboard](https://github.com/MLB-LED-Scoreboard/mlb-led-scoreboard).
 
 - [rpi-rgb-led-matrix](https://github.com/hzeller/rpi-rgb-led-matrix) by Henner Zeller
 - ESPN API for NWSL data
 - NWSL teams and fans
-- Development assisted by Claude (Anthropic) and ChatGPT (OpenAI)
 
 ## Support
 
@@ -277,3 +265,7 @@ If you encounter issues:
 1. Check the Troubleshooting section above
 2. Review logs in `/tmp/nwsl_refresh.log` and `/tmp/nwsl_display.log` (if using cron)
 3. Open an issue on GitHub with details about your setup and error messages
+
+---
+
+**Enjoy your NWSL LED Scoreboard!** ⚽✨

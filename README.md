@@ -24,7 +24,7 @@ An LED scoreboard for the National Women's Soccer League (NWSL). Displays live s
 - Raspberry Pi 4
 - 64x32 RGB LED Matrix
 - Adafruit RGB Matrix Bonnet
-- 5V Power Supply (4A+ recommended for LED matrix)
+- 5V 4A (4000mA) switching power supply (x2, the board uses a lot of juice so it's recommended to have one for the board and one for the Pi)
 
 **Note:** This project has been tested and confirmed working with the configuration above. Other setups (Raspberry Pi 3B+, 5, HAT instead of Bonnet, different matrix sizes) may work but have not been tested. You may need to adjust the `hardware_mapping` setting in `run_nwsl_scoreboard.py`.
 

@@ -92,7 +92,7 @@ def main():
     print("   ✓ Display started")
     print("\n" + "=" * 60)
     print("Scoreboard is running!")
-    print("Data will refresh every 45 seconds")
+    print("Data will refresh every 15 seconds")
     print("Press Ctrl+C to stop")
     print("=" * 60 + "\n")
 

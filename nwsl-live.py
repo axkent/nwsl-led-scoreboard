@@ -6,34 +6,18 @@ import argparse
 import pytz
 
 # ---------- CONFIG ----------
-season_year = 2025
+season_year = 20265
 lookback_days = 14
 lookahead_days = 14
 
 # Team colors/logos
 team_lookup = pd.DataFrame({
     "team": ["SD", "POR", "SEA", "LA", "CHI", "KC", "NC", "HOU",
-             "ORL", "WAS", "UTA", "BAY", "GFC", "LOU"],
+             "ORL", "WAS", "UTA", "BAY", "GFC", "LOU", "BOS", "DEN"],
     "bg_color": ["#002F65","#004B25","#002244","#552583","#DA291C","#004B87",
                  "#002F56","#FF6F00","#61259E","#C8102E","#002F65","#1E1E1E",
-                 "#00A19C","#C8B3F6"],
-    "text_color": ["#FFFFFF"]*14,
-    "logo_url": [
-        "https://a.espncdn.com/i/teamlogos/soccer/500/11256.png",
-        "https://a.espncdn.com/i/teamlogos/soccer/500/210.png",
-        "https://a.espncdn.com/i/teamlogos/soccer/500/233.png",
-        "https://a.espncdn.com/i/teamlogos/soccer/500/11897.png",
-        "https://a.espncdn.com/i/teamlogos/soccer/500/187.png",
-        "https://a.espncdn.com/i/teamlogos/soccer/500/8726.png",
-        "https://a.espncdn.com/i/teamlogos/soccer/500/10183.png",
-        "https://a.espncdn.com/i/teamlogos/soccer/500/6074.png",
-        "https://a.espncdn.com/i/teamlogos/soccer/500/5730.png",
-        "https://a.espncdn.com/i/teamlogos/soccer/500/8823.png",
-        "https://a.espncdn.com/i/teamlogos/soccer/500/11307.png",
-        "https://a.espncdn.com/i/teamlogos/soccer/500/11767.png",
-        "https://a.espncdn.com/i/teamlogos/soccer/500/11766.png",
-        "https://a.espncdn.com/i/teamlogos/soccer/500/20905.png"
-    ]
+                 "#00A19C","#C8B3F6","#000000", "#1A5C2A"],
+    "text_color": ["#FFFFFF"]*16
 })
 
 # Parse timezone argument

@@ -32,7 +32,9 @@ class NWSLScoreboard:
             "LA": {"home": "#E17263", "away": "#1C1C1C"},
             "CHI": {"home": "#244E69", "away": "#C8102E"},
             "NC": {"home": "#01426A", "away": "#B3A369"},
-            "HOU": {"home": "#101820", "away": "#FF6900"}
+            "HOU": {"home": "#101820", "away": "#FF6900"},
+            "BOS": {"home": "#000000", "away": "#98FF98"},
+	    "DEN": {"home": "#1A5C2A", "away": "#E85D26"}
         }
         
         if favorite_team:

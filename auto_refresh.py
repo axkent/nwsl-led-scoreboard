@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Background data refresh script - runs nwsl-live.py every 45 seconds
+Background data refresh script - runs nwsl-live.py every 15 seconds
 Run this in a separate terminal or as a background process
 
 Usage:
@@ -13,7 +13,7 @@ import time
 import sys
 import argparse
 
-REFRESH_INTERVAL = 45  # 45 seconds
+REFRESH_INTERVAL = 15  # 15 seconds
 
 def fetch_data(tz):
     """Run nwsl-live.py to fetch latest data"""
@@ -21,7 +21,7 @@ def fetch_data(tz):
         result = subprocess.run(['sudo', 'python3', 'nwsl-live.py', '--tz', tz],
                                 capture_output=True,
                                 text=True,
-                                timeout=30,
+                                timeout=12,
                                 check=True)
         print(f"[{time.strftime('%H:%M:%S')}] {result.stdout.strip()}")
         return True

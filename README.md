@@ -96,11 +96,13 @@ sudo venv/bin/python3 main.py --team SEA
 - `ORL` - Orlando Pride
 - `WAS` - Washington Spirit
 - `POR` - Portland Thorns FC
-- `GFC` - NJ/NY Gotham FC
+- `GFC` - Gotham FC
 - `LA` - Angel City FC
-- `CHI` - Chicago Red Stars
+- `CHI` - Chicago Stars FC
 - `NC` - North Carolina Courage
 - `HOU` - Houston Dash
+- `BOS` - Boston Legacy FC
+- `HOU` - Denver Summit FC
 
 ### Use Your Local Timezone
 

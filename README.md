@@ -102,7 +102,7 @@ sudo venv/bin/python3 main.py --team SEA
 - `NC` - North Carolina Courage
 - `HOU` - Houston Dash
 - `BOS` - Boston Legacy FC
-- `HOU` - Denver Summit FC
+- `DEN` - Denver Summit FC
 
 ### Use Your Local Timezone
 

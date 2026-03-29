@@ -153,6 +153,8 @@ for team in team_lookup['team']:
         games_to_show.append(game_to_show.to_dict())
         print(f"  ✓ Added event {game_to_show['event_id']} to list")
     else:
+        teams_with_games.add(game_to_show['home_team'])
+        teams_with_games.add(game_to_show['away_team'])
         print(f"  ✗ Skipped event {game_to_show['event_id']} - already in list")
 
 # Convert to DataFrame and remove duplicate events

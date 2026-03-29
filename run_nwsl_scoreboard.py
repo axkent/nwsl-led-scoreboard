@@ -120,7 +120,10 @@ class NWSLScoreboard:
                     filtered_events[event_id] = games
 
             if filtered_events:
-                return [list(filtered_events.values())[0]]
+                # Prioritize live games, then by date
+                sorted_events = sorted(filtered_events.values(), 
+                    key=lambda g: (0 if g[0]['state'] == 'in' else 1, g[0]['date']))
+                return [sorted_events[0]]
             else:
                 return []
 

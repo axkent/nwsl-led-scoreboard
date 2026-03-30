@@ -2,6 +2,12 @@
 
 An LED scoreboard for the National Women's Soccer League (NWSL). Displays live scores and schedules for your favorite team on a Raspberry Pi-powered LED matrix.
 
+**2026 Updates**
+
+- Added expansion teams **Boston Legacy (BOS)** and **Denver Summit (DEN)**
+- Improved refresh intervals for faster live game updates
+- Fixed team deduplication logic to correctly prioritize live games when filtering by team
+
 ![NWSL Scoreboard](https://img.shields.io/badge/status-active-success) ![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-4-red)
 
 ![IMG_6962](https://github.com/user-attachments/assets/9b468052-b406-4b66-ae9b-7121ad3d1457)

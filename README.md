@@ -248,7 +248,7 @@ MIT License - feel free to use and modify for your own projects.
 
 ## Acknowledgments
 
-- This project was heavily inspired by [MLB-LED-Scoreboard](https://github.com/MLB-LED-Scoreboard/mlb-led-scoreboard).
+- This project was heavily inspired by [MLB-LED-Scoreboard](https://github.com/MLB-LED-Scoreboard/mlb-led-scoreboard)
 - [rpi-rgb-led-matrix](https://github.com/hzeller/rpi-rgb-led-matrix) by Henner Zeller
 - ESPN API for NWSL data
 - NWSL teams and fans

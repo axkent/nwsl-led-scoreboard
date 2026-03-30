@@ -16,7 +16,7 @@ import time
 import sys
 import argparse
 
-REFRESH_INTERVAL = 15  # 15 seconds
+REFRESH_INTERVAL = 5  # 5 seconds
 
 
 def fetch_data(tz):

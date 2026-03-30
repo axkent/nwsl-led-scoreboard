@@ -261,9 +261,9 @@ class NWSLScoreboard:
             last_reload = time.time()
 
             while True:
-                # FIX: Reload data every 15 seconds to stay in sync with auto_refresh.py.
+                # FIX: Reload data every 5 seconds to stay in sync with auto_refresh.py.
                 # Was 45 seconds, which caused the display to lag behind fresh data.
-                if time.time() - last_reload >= 15:
+                if time.time() - last_reload >= 5:
                     try:
                         json_path = '/tmp/nwsl_schedule.json'
                         with open(json_path, 'r') as f:
@@ -277,7 +277,7 @@ class NWSLScoreboard:
 
                 if not matchups:
                     print("No games to display")
-                    time.sleep(10)
+                    time.sleep(3)
                     continue
 
                 for i, matchup in enumerate(matchups):
@@ -288,7 +288,7 @@ class NWSLScoreboard:
 
                     print(f"Displaying matchup {i+1}/{len(matchups)}")
                     self.draw_matchup(matchup)
-                    time.sleep(5)
+                    time.sleep(2)
 
         except KeyboardInterrupt:
             print("\nExiting...")

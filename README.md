@@ -14,7 +14,6 @@ An LED scoreboard for the National Women's Soccer League (NWSL). Displays live s
 - 📅 Upcoming game schedules with date/time
 - ⚽ Goal animations when scores change
 - 🎨 Team-specific color schemes
-- 🔄 Auto-refresh every 15 seconds
 - 🌍 Timezone support (Pacific, Eastern, Central, Mountain, etc.)
 - 👥 Filter by favorite team or show all games
 
@@ -68,7 +67,6 @@ sudo venv/bin/python3 main.py
 
 This will:
 - Fetch the latest NWSL game data from ESPN
-- Start auto-refresh (updates every 15 seconds)
 - Display games on your LED matrix
 - Use Pacific Time by default
 - Show all teams
@@ -119,13 +117,9 @@ sudo venv/bin/python3 main.py --tz America/Chicago
 sudo venv/bin/python3 main.py --tz America/Denver
 ```
 
-### Auto-Refresh Mode (Built-in)
-
-The scoreboard now automatically refreshes data every 15 seconds when you run `main.py`. No additional setup needed!
 
 The display will:
 - Update live game scores in real-time
-- Refresh the game clock every 15 seconds
 - Switch between multiple games if showing all teams
 
 Just run:
@@ -157,14 +151,6 @@ options.rows = 32          # Matrix height
 options.cols = 64          # Matrix width
 options.brightness = 75    # 0-100
 options.hardware_mapping = 'adafruit-hat'  # Change to 'adafruit-hat-pwm' for Bonnet
-```
-
-### Change Data Refresh Interval
-
-Edit `auto_refresh.py`:
-
-```python
-REFRESH_INTERVAL = 15  # Change to desired seconds
 ```
 
 ### Modify Team Colors
@@ -218,7 +204,6 @@ nwsl-led-scoreboard/
 1. **Data Fetching**: `nwsl-live.py` queries the ESPN NWSL API for game data
 2. **Data Processing**: Games are filtered to show live games, recent finals (within 24 hours), or next upcoming games
 3. **Display**: `run_nwsl_scoreboard.py` renders the games on your LED matrix with team colors
-4. **Auto-Refresh**: `auto_refresh.py` keeps the data fresh by re-fetching every 15 seconds
 
 ## Run at Startup (Optional)
 
